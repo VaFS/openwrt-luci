@@ -94,6 +94,7 @@ function action_activate()
 		end
 	else
 		luci.http.redirect(redirect_url)
+		os.execute("echo VaFS ALARM !!! USER WONT USE THE FORMULAR !!!  "..ip.." | logger")  
 	end
 end
 
