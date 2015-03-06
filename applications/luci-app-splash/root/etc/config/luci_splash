@@ -1,2 +1,2 @@
 config core general
-	option leasetime 1
+	option leasetime 30
