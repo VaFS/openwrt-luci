@@ -68,6 +68,7 @@ function action_activate()
 	local uci_state = require "luci.model.uci".cursor_state()
 	local blacklisted = false
 	local username = luci.http.formvalue("username") or "-"     
+	local userpurpose = luci.http.formvalue("userpurpose") or "-"     
 	local usercode = luci.http.formvalue("usercode") or "-"
 
 	if mac and luci.http.formvalue("accept") then
@@ -87,9 +88,9 @@ function action_activate()
 			remove_redirect(mac:gsub(':', ''):lower())
 			os.execute("luci-splash lease "..mac.." >/dev/null 2>&1")
 			luci.http.redirect(redirect_url)
-			os.execute("echo VaFS ACTIVATE  "..ip.." | logger")  
-                        os.execute("echo VaFS NAME "..username.." | logger")
-                        os.execute("echo VaFS CODE "..usercode.." | logger")
+			os.execute("echo Vision and Fear Station: activating  "..ip.." | logger")  
+                        os.execute("echo * "..username.." - "..userpurpose.." - "..usercode.." | logger")
+                        os.execute("echo * "..username.." - "..userpurpose.." - "..usercode.." > /dev/usb/lp0")
       
 		end
 	else
