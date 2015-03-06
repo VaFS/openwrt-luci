@@ -598,7 +598,7 @@ function sync()
 	local leases = uci:get_all("luci_splash_leases")
 	
 	-- Convert leasetime to seconds
-	local leasetime = tonumber(uci:get("luci_splash", "general", "leasetime")) * 3600
+	local leasetime = tonumber(uci:get("luci_splash", "general", "leasetime"))
 	
 	-- Clean state file
 	uci:load("luci_splash_leases")

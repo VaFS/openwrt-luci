@@ -7,7 +7,7 @@ m = Map("luci_splash", translate("Client-Splash"), translate("Client-Splash is a
 s = m:section(NamedSection, "general", "core", translate("General"))
 s.addremove = false
 
-s:option(Value, "leasetime", translate("Clearance time"), translate("Clients that have accepted the splash are allowed to use the network for that many hours."))
+s:option(Value, "leasetime", translate("Clearance time"), translate("Clients that have accepted the splash are allowed to use the network for that many seconds."))
 local redir = s:option(Value, "redirect_url", translate("Redirect target"), translate("Clients are redirected to this page after they have accepted the splash. If this is left empty they are redirected to the page they had requested."))
 redir.rmempty = true
 

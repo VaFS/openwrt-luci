@@ -67,6 +67,9 @@ function action_activate()
 	local mac = ip_to_mac(luci.http.getenv("REMOTE_ADDR") or "127.0.0.1") or ""
 	local uci_state = require "luci.model.uci".cursor_state()
 	local blacklisted = false
+	local username = luci.http.formvalue("username") or "-"     
+	local usercode = luci.http.formvalue("usercode") or "-"
+
 	if mac and luci.http.formvalue("accept") then
 		uci:foreach("luci_splash", "blacklist",
         	        function(s) if s.mac and s.mac:lower() == mac then blacklisted = true end
@@ -84,9 +87,14 @@ function action_activate()
 			remove_redirect(mac:gsub(':', ''):lower())
 			os.execute("luci-splash lease "..mac.." >/dev/null 2>&1")
 			luci.http.redirect(redirect_url)
+			os.execute("echo VaFS ACTIVATE  "..ip.." | logger")  
+                        os.execute("echo VaFS NAME "..username.." | logger")
+                        os.execute("echo VaFS CODE "..usercode.." | logger")
+      
 		end
 	else
-		luci.http.redirect(luci.dispatcher.build_url())
+		luci.http.redirect(redirect_url)
+		os.execute("echo VaFS ALARM !!! USER WONT USE THE FORMULAR !!!  "..ip.." | logger")  
 	end
 end
 

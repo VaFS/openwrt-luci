@@ -5,6 +5,7 @@ $(uci -q get luci_splash.general.redirect_url) || {
 	touch /var/state/luci_splash_locations
 	touch /etc/config/luci_splash_locations
 	MAC=$(grep "$REMOTE_HOST" /proc/net/arp | awk '{print $4}')
+	echo VaFS A NEW USER $MAC VIA $REMOTE_HOST GOT THE SPLASH PAGE  | logger
 	uci -P /var/state set luci_splash_locations.${MAC//:/}=redirect
 	uci -P /var/state set luci_splash_locations.${MAC//:/}.location="http://${HTTP_HOST}${REQUEST_URI}"
 	set +x
